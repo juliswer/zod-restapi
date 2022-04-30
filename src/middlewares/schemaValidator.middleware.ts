@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { productSchema } from "../schemas/product.schema";
+import { checkPassword } from "../schemas/auth.schema";
 import { AnyZodObject, ZodError } from "zod";
 
 export const schemaValidation =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
+      if (req.body.password) checkPassword(req.body.password);
       schema.parse(req.body);
       next();
     } catch (error) {
@@ -13,6 +14,7 @@ export const schemaValidation =
         return res.status(400).json(
           error.issues.map((issue) => ({
             message: issue.message,
+            path: issue.path,
           }))
         );
       }
