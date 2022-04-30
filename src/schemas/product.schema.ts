@@ -19,3 +19,5 @@ export const updateSchema = z.object({
     title: z.string()
   })
 });
+
+type ProductType = z.infer<typeof productSchema>
