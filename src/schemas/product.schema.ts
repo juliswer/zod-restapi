@@ -16,8 +16,12 @@ export const updateSchema = z.object({
     id: z.string().min(3),
   }),
   query: z.object({
-    title: z.string()
-  })
+    title: z.string(),
+  }),
 });
 
-type ProductType = z.infer<typeof productSchema>
+export type ProductType = z.infer<typeof productSchema>["body"];
+
+export type UpdateProductBodyType = z.infer<typeof updateSchema>["body"];
+export type UpdateProductParamsType = z.infer<typeof updateSchema>["params"];
+export type UpdateProductQueryType = z.infer<typeof updateSchema>["query"];
