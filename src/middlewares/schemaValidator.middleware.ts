@@ -7,7 +7,11 @@ export const schemaValidation =
   (req: Request, res: Response, next: NextFunction) => {
     try {
       if (req.body.password) checkPassword(req.body.password);
-      schema.parse(req.body);
+      schema.parse({
+        body: req.body,
+        params: req.params,
+        query: req.query,
+      });
       next();
     } catch (error) {
       if (error instanceof ZodError) {
