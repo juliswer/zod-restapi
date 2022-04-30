@@ -1,15 +1,18 @@
 import { z, ZodError } from "zod";
 
 const loginSchema = z.object({
-  email: z.string().email().nonempty("Email is required"),
+  email: z.string().nonempty("Email is required").email({
+    message: "Email is invalid"
+  }),
   password: z.string().nonempty("Password is required"),
 });
 
 export const postUser = (req: any, res: any) => {
   try {
-    loginSchema.parse(req.body);
+    const schemaRes = loginSchema.parse(req.body);
+    console.log(schemaRes)
 
-    res.send("hello world");
+    res.send("login");
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json(
