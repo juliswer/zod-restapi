@@ -1,7 +1,8 @@
 import { ZodError } from "zod";
 import {loginSchema} from '../schemas/auth.schema'
+import {Request, Response} from 'express'
 
-export const postUser = (req: any, res: any) => {
+export const postUser = (req: Request, res: Response) => {
   try {
     const schemaRes = loginSchema.parse(req.body);
     console.log(schemaRes);
@@ -15,6 +16,6 @@ export const postUser = (req: any, res: any) => {
         }))
       );
     }
-    return res.statsu(500).json({ message: "Intenal server error" });
+    return res.status(500).json({ message: "Intenal server error" });
   }
 };
