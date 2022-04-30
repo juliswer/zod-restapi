@@ -1,12 +1,10 @@
 import { ZodError } from "zod";
-import {loginSchema} from '../schemas/auth.schema'
-import {Request, Response} from 'express'
+import { loginSchema } from "../schemas/auth.schema";
+import { Request, Response } from "express";
 
 export const postUser = (req: Request, res: Response) => {
   try {
-    const schemaRes = loginSchema.parse(req.body);
-    console.log(schemaRes);
-
+    console.log(req.body);
     res.send("login");
   } catch (error) {
     if (error instanceof ZodError) {

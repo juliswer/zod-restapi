@@ -9,7 +9,7 @@ export const schemaValidation =
       schema.parse(req.body);
       next();
     } catch (error) {
-      console.log(error)
-      res.status(400).json({message: "internal server error"})
+      console.log(error);
+      res.status(400).json({ message: "internal server error" });
     }
   };
