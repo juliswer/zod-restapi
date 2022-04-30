@@ -15,4 +15,7 @@ export const updateSchema = z.object({
   params: z.object({
     id: z.string().min(3),
   }),
+  query: z.object({
+    title: z.string()
+  })
 });
