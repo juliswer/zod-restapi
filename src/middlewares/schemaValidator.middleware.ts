@@ -5,7 +5,11 @@ import { AnyZodObject } from "zod";
 export const schemaValidation =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
-    console.log("exejucted");
-    schema.parse(req.body);
-    next();
+    try {
+      schema.parse(req.body);
+      next();
+    } catch (error) {
+      console.log(error)
+      res.status(400).json({message: "internal server error"})
+    }
   };
