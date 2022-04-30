@@ -13,6 +13,6 @@ export const updateSchema = z.object({
     price: z.number().nonnegative().optional(),
   }),
   params: z.object({
-    id: z.string().min(3)
-  })
+    id: z.string().min(3),
+  }),
 });
